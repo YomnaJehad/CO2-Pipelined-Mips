@@ -1,0 +1,20 @@
+/*i'll assume i'm getting lines of Binary Instructions from the GUI and that these
+instructions are reserved in the Instruction memory*/
+//Fetch Stage
+module fetch ( clk, PC ,instruction , PCnew );
+
+input clk;
+input [9:0] PC ; //The doctor implemented it :32 bits in the lecture maybe for synth.
+output [31:0] instruction;
+output  [10:0 ]PCnew;
+//reg [7:0] IMemory [0:4095]; //Divide it into bytes not words
+reg [31:0] IMemory [0:1023]; //Divide it into words
+
+
+assign PCnew=PC+4; 
+/*This PCnew should go to the exec stage according to the image i have to check if this is a beq but even if it's true, the instruction should be fetched either ways */
+assign instruction = IMemory[PC];
+
+
+endmodule
+
