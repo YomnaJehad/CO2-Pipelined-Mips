@@ -1,0 +1,25 @@
+module regfile (clk, WE, RR1, RR2, WR, mux, result, WD, RD1, RD2);
+
+ input clk;
+input WE, mux;
+ 
+input signed [31:0] result,WD;
+input [4:0] RR1,RR2, WR;
+output reg  signed [31:0] RD1, RD2;
+reg signed [31:0] registers1 [0:31];
+
+always @ (RR1, RR2)
+	begin
+		RD1 <= registers1[RR1];
+		RD2 <= registers1[RR2];
+	end
+
+always @(posedge clk)
+begin
+if (WE)
+  
+  registers1[WR] <= (mux)? result : WD ;  
+ 
+end
+ 
+endmodule
