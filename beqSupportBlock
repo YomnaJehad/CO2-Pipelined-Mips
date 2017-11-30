@@ -1,0 +1,18 @@
+//beq whole uppercrap 
+
+module beq_exe(signExtendedNumber, newPC, Branch, zeroFlag , finalPC);
+input [31:0] signExtendedNumber;
+input [31:0] newPC;
+input Branch, zeroFlag;
+output [31:0] finalPC;
+
+wire Sel;
+assign Sel = Branch & zeroFlag;
+
+wire [31:0]ALUresult;
+assign ALUresult = newPC + (signExtendedNumber<<2);
+
+assign finalPC = (Sel)?ALUresult:newPC;
+
+
+endmodule
