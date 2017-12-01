@@ -6,7 +6,8 @@ wire [4:0]MEMWBrd, MEMWBrt;
 wire[5:0] LW , ALUop,MEMWBop;
 wire [5:0] EXMEMop;
 assign MEMWBrd = MEMWBIR[15:11]; //rd ? eld 
-assign MEMWBrt = MEMWBIR[20:16]; //rt ? eld--used for loads    assign MEMWBop = MEMWBIR[31:26]; // the opcode   
+assign MEMWBrt = MEMWBIR[20:16]; //rt ? eld--used for loads   
+assign MEMWBop = MEMWBIR[31:26]; // the opcode   
 always @ (posedge clock) 
 begin  
 if ((MEMWBop==ALUop) && (MEMWBrd != 0)) // update registers if ALU operation and destination not 0  
