@@ -1,0 +1,16 @@
+module mux_WB(DataOut,ReadData,AluOut,sel);
+output reg[31:0]DataOut;
+input[31:0]ReadData,AluOut;
+input [1:0]sel;
+always@(ReadData,AluOut,sel)
+begin
+if(sel==0)
+begin
+DataOut<= ReadData;
+end
+else
+begin
+ DataOut<= AluOut;
+end
+end
+endmodule
