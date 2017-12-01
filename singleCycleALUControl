@@ -1,8 +1,10 @@
-module ALUControl (ALUOP, func, ALUControl);
+
+
+module ALUControl (ALUOP, func, ALUCtrl);
 input [1:0] ALUOP;
 input [5:0] func;
-output [2:0] ALUControl;
-reg ALUControl;
+output [2:0] ALUCtrl;
+reg ALUCtrl;
 //ALUControl output should be like this 
 parameter [2:0] andd=3'b 000,
 		orr =3'b 001, 
@@ -11,7 +13,7 @@ parameter [2:0] andd=3'b 000,
 		slt =3'b 111;
 always @ (func or ALUOP)
 begin
-	case(ALUOP)
+/*	case(ALUOP)
 		6'b000000: 
 			case(func)
 				32:  ALUControl <=add;
@@ -24,13 +26,25 @@ begin
 		35:  ALUControl<=add; //For a LW
 		43:  ALUControl<=add; //For a SW
 		4 :  ALUControl<=sub; //For a beq 
+*/
 
-	
-		
-	endcase
+case(ALUOP)
+	2'b 00: ALUCtrl <= 3'b 010;
+	2'b 01: ALUCtrl <= 3'b 110;
+	2'b 1x: 
+		case (func)
+			32: ALUCtrl <=3'b 010;
+			34: ALUCtrl <=3'b 110;
+			36: ALUCtrl <=3'b 000;
+			37: ALUCtrl <=3'b 001;
+			42: ALUCtrl <=3'b 111;
+			0:  ALUCtrl <=3'b 100;
+
+		endcase
+
+endcase 
 
 end
 
-	
-
 endmodule
+
